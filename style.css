@@ -1,18 +1,28 @@
 h10 {
-    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    background-image: linear-gradient(to left,
+            violet,
+            indigo,
+            blue,
+            green,
+            yellow,
+            orange,
+            red);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
 }
+
 .wrapper {
- display: grid;
- grid-template-columns: 250px 1fr;
- min-height: 100vh;   
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
 }
+
 body {
     font-family: sans-serif;
     display: flex;
     background-image: url(./images/Background.jpg);
+    overflow: hidden;
 }
 
 .sidebar {
@@ -34,19 +44,27 @@ body {
     text-align: center;
 }
 
-.sidebar li a:hover {
+.sidebar li a:hover, .sidebar-content header a:hover{
     background-color: #00ffaa;
     border-radius: 20px;
     color: white;
 }
 
-.sidebar-content { /* New class for sidebar content */
-    position: relative; /* Position relative to the sidebar itself */
-    z-index: 1; /* Ensure content is on top of the blur */
+.scrollable::-webkit-scrollbar{
+    width: 0px; 
+}
+
+.sidebar-content {
+    /* New class for sidebar content */
+    position: relative;
+    /* Position relative to the sidebar itself */
+    z-index: 1;
+    /* Ensure content is on top of the blur */
 }
 
 .sidebar hr {
-    border-color: #00ffaa; /* Change this to your desired color */
+    border-color: #00ffaa;
+    /* Change this to your desired color */
 }
 
 .sidebar::before {
@@ -56,19 +74,256 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #5c5c5c49; /* Adjust opacity as needed */
-    backdrop-filter: blur(15px); /* Adjust blur radius */
-    border-radius: 17px; /* Apply border-radius to the sidebar content */
+    background-color: #5c5c5c49;
+    /* Adjust opacity as needed */
+    backdrop-filter: blur(15px);
+    /* Adjust blur radius */
+    border-radius: 17px;
+    /* Apply border-radius to the sidebar content */
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.section {
+    display: none;
+    padding: 20px;
+}
+
+.section.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-info-main {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.song-details {
+    flex-grow: 1;
+    max-width: 350px;
+}
+
+.song-title-main,
+.artist-main {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-art-main {
+    width: calc(50vw - 30%);
+    max-width: 300px;
+    min-width: 100px;
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ffaa;
+}
+
+.header-content {
+    font-size: clamp(20px, 6vw, 80px);;
+    font: bold;
+    color: #00ffaa;
+}
+
+.artist-main {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.song-list-header {
+    display: flex;
+    color: #ccc;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: #222;
+    z-index: 1;
+}
+
+.song-list-header span {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.song-number-header {
+    width: 30px;
+    margin-left: 10px;
+}
+
+.song-name-header {
+    flex-grow: 1;
+    margin-left: 50;
+}
+
+.song-duration-header {
+    width: 60px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.song-list {
+    overflow-y: auto;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #666;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.song-item:hover {
+    background-color: #00ffaa;
+}
+
+.song-item .song-number {
+    margin-left: 10px;
+    color: #ccc;
+}
+
+.song-item .song-name {
+    flex-grow: 1;
+    color: #fff;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.song-item .song_duration {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    width: 10px;
+    width: 60px;
+    text-align: right;
 }
 
 .playlist {
-overflow-y: auto;
-width: 100%;
-flex-grow: 1;
-padding: 0 10px;
-display: none;
-}
-main{
+    overflow-y: auto;
+    width: 100%;
     flex-grow: 1;
-    padding: 20px;
+    padding: 0 10px;
+    display: none;
+}
+
+.playlist-section {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3 ease;
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.playlist-section:hover {
+    background-color: #00ffaa;
+}
+
+.progress-bar {
+    width: 95%;
+    height: 5px;
+    background-color: gray;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.progress {
+    height: 100;
+    background-color: #00ffaa;
+    width: 0%;
+    border-radius: 5px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.player-controls button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: white;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+.player-controls button:hover {
+    color: #00ffaa;
+}
+
+.player-controls .repeat.active,
+.player-controls .shuffle.active {
+    color: #00ffaa;
+}
+
+.time-info {
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    font-size: 0.9rem;
+    margin: 0 10px;
+    width: 100px;
+    justify-content: center;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    position: absolute;
+    right: 30px;
+}
+
+.volume-bar {
+    width: 80px;
+    margin-left: 5px;
+    -webkit-appearance: none;
+    background: #666;
+    outline: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ffaa;
+    cursor: pointer;
+}
+
+.volume-bar::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ffaa;
+    cursor: pointer;
 }
