@@ -32,11 +32,13 @@ body {
 }
 
 .sidebar ul {
-    list-style-type: none;
     padding: 0;
 }
 
-.sidebar li a {
+.choosing_album {
+    padding: 3px 0px;
+    background: none;
+    border: none;
     display: block;
     color: #00ffaa;
     padding: 10px 15px;
@@ -44,10 +46,24 @@ body {
     text-align: center;
 }
 
-.sidebar li a:hover, .sidebar-content header a:hover{
+.choosing_album:hover{
+    cursor: pointer;
     background-color: #00ffaa;
     border-radius: 20px;
-    color: white;
+    color: rgb(255, 255, 255);
+}
+
+.choosing_album:active{
+    cursor:progress;
+    background-color: #ffffff;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.sidebar-content header:hover {
+    cursor:no-drop;
+    background-color: #00ffaa;
+    border-radius: 20px;
 }
 
 .scrollable::-webkit-scrollbar{
@@ -64,6 +80,7 @@ body {
 
 .sidebar hr {
     border-color: #00ffaa;
+    border-radius: 20px;
     /* Change this to your desired color */
 }
 
@@ -74,7 +91,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #5c5c5c49;
+    background-color: #42424249;
     /* Adjust opacity as needed */
     backdrop-filter: blur(15px);
     /* Adjust blur radius */

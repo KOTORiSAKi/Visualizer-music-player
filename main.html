@@ -23,26 +23,18 @@
                     </header>
                     <hr>
                     <ul class="scrollable" style="height: calc(100vh - 290px); overflow: scroll;">
-                        <li>
-                            <a href="#" class="button" style="padding: 3px 0px;"><img src="images/EDM_cover.jpeg"
-                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>EDM</a>
-                        </li>
-                        <li>
-                            <a href="#" class="button" style="padding: 3px 0px;"><img src="images/JAZZ_cover.png"
-                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>JAZZ</a>
-                        </li>
-                        <li>
-                            <a href="#" class="button" style="padding: 3px 0px;"><img src="images/EDM_cover.jpeg"
-                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>EDM</a>
-                        </li>
-                        <li>
-                            <a href="#" class="button" style="padding: 3px 0px;"><img src="images/EDM_cover.jpeg"
-                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>EDM</a>
-                        </li>
-                        <li>
-                            <a href="#" class="button" style="padding: 3px 0px;"><img src="images/EDM_cover.jpeg"
-                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>EDM</a>
-                        </li>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/EDM_cover.jpeg"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>EDM</botton>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/JAZZ_cover.png"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>JAZZ</botton>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/EDM_cover.jpeg"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>LOFI</botton>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/EDM_cover.jpeg"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>PHONK</botton>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/EDM_cover.jpeg"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>POP</botton>
+                            <button type="button" class="choosing_album" style="padding: 3px 0px;"><img id="" src="images/EDM_cover.jpeg"
+                                    style="width: 70px; border-radius: 20px; border: #00ffaa solid 2px; text-align: lrft;"><br>ROCK</botton>
                         <section id="playlist-section">
                             <div class="playlist"></div>
                     </ul>
@@ -56,6 +48,10 @@
                                         top: 20px;
                                         left: 165px;">
                 <div class="sidebar-content, scrollable" style="height: calc(100vh - 170px); overflow: scroll;">
+                    <audio id="audio-source" controls autoplay>
+                        <source src="./music/rock/二口魔菜 Futakuchi Mana - KING - 01 KING.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
                     <section id="playlist-section">
                         <div class="main-content">
                             <div class="section-active" id="file" style="padding: 10px;">
@@ -110,6 +106,56 @@
                 </div>
         </main>
         <audio id="audio-element"></audio>
+
+
+        <div id="audio-container">
+            <canvas id="audio-visualizer"></canvas>
+        </div>
+        <script>
+            const audio = document.getElementById('audio-source');
+            const canvas = document.getElementById('audio-visualizer');
+            const ctx = canvas.getContext('2d');
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioContext.createAnalyser();
+            const source = audioContext.createMediaElementSource(audio);
+    
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+    
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+    
+            function draw() {
+                requestAnimationFrame(draw);
+    
+                analyser.getByteFrequencyData(dataArray);
+    
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+    
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    
+                const barWidth = (canvas.width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
+    
+                for (let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i];
+    
+                    ctx.fillStyle = '#00ffaa'; // Use the specified color
+                    ctx.fillRect(x, canvas.height - barHeight / 1, barWidth, barHeight / 1);
+    
+                    x += barWidth + 1;
+                }
+            }
+    
+            audio.play();
+            draw();
+        </script>
+
+
+
 </body>
 
 </html>
