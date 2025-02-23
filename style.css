@@ -23,6 +23,8 @@ body {
     display: flex;
     background-image: url(./images/Background.jpg);
     overflow: hidden;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .sidebar {
@@ -128,7 +130,16 @@ body {
     max-width: 350px;
 }
 
-.song-title-main,
+.song-title-main {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .artist-main {
     font-size: 1.1rem;
     margin-bottom: 5px;
@@ -165,7 +176,6 @@ body {
     padding: 10px;
     position: sticky;
     top: 0;
-    background-color: #222;
     z-index: 1;
 }
 
@@ -182,37 +192,49 @@ body {
 .song-name-header {
     flex-grow: 1;
     margin-left: 50;
+    margin-right: 20px; 
 }
 
 .song-duration-header {
     width: 60px;
     text-align: right;
     margin-right: 10px;
+    margin-left: 20px; /* เพิ่มระยะห่างด้านซ้าย */
 }
 
 .song-list {
     overflow-y: auto;
+    
 }
 
 .song-item {
+    color: #ccc;
+    gap: 22px;
     display: flex;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #666;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.song-item:hover {
+  }
+  
+  .song-item:hover {
     background-color: #00ffaa;
-}
-
-.song-item .song-number {
+  }
+  
+  .song-number {
     margin-left: 10px;
     color: #ccc;
-}
+    min-width: 25px;
+  }
 
-.song-item .song-name {
+  .song-item .song-number {
+    margin-left: 10px;
+    color: #ccc;
+    min-width: 25px;
+  }
+  
+  .song-item .song-name {
     flex-grow: 1;
     color: #fff;
     font-size: 0.9rem;
@@ -220,16 +242,16 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 300px;
-}
-
-.song-item .song_duration {
+    
+  }
+  
+  .song-item .song-duration {
     color: #ccc;
     font-size: 0.9rem;
-    margin-left: 10px;
-    width: 10px;
+    margin-left: auto;
     width: 60px;
     text-align: right;
-}
+  }
 
 .playlist {
     overflow-y: auto;
@@ -302,7 +324,7 @@ body {
 .time-info {
     display: flex;
     align-items: center;
-    color: #ccc;
+    color: #ffffff;
     font-size: 0.9rem;
     margin: 0 10px;
     width: 100px;
@@ -311,6 +333,7 @@ body {
 
 .volume-control {
     display: flex;
+    color: white;
     align-items: center;
     margin-left: 10px;
     position: absolute;
@@ -323,7 +346,7 @@ body {
     -webkit-appearance: none;
     background: #666;
     outline: none;
-    height: 5px;
+    height: 10px;
     border-radius: 5px;
 }
 
@@ -344,3 +367,39 @@ body {
     background: #00ffaa;
     cursor: pointer;
 }
+.player-controls-sidebar {
+    padding: 20px;
+    width: calc(100vw - 88px);
+    height: 150px; 
+    top: calc(100vh - 170px);
+    left: 20px;
+  }
+  .main-content-sidebar {
+    padding: 20px;
+    width: calc(100vw - 235px);
+    height: calc(100vh - 200px);
+    top: 20px;
+    left: 165px;
+  }
+  #audio-visualizer {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+  #header-icon {
+    width: 80px;
+    height: 90px;
+  }
+  .sidebar-scroll {
+    height: calc(100vh - 290px);
+    overflow-y: auto;
+  }
+  #file {
+    padding: 10px;
+  }
+  
+  .album-thumb {
+    width: 70px;
+    border-radius: 20px;
+    border: #00ffaa solid 2px;
+  }

@@ -1,20 +1,275 @@
-
-
-const folder_name = ['edm', 'jazz', 'lofi', 'phonk', 'pop', 'rock'];
-
-let folder_paths;
-
-function createFolderPaths(fileNames, baseDirectory) {
-    const folderPaths = fileNames.map((fileName) => {
-        return path.join(baseDirectory, fileName);
+document.addEventListener('DOMContentLoaded', () => {
+    // === Grab Elements ===
+    const audioElement   = document.getElementById('audio-element');
+    const canvas         = document.getElementById('audio-visualizer');
+    const ctx            = canvas.getContext('2d');
+  
+    // Player controls
+    const playPauseBtn   = document.querySelector('.play-pause');
+    const prevBtn        = document.querySelector('.prev');
+    const nextBtn        = document.querySelector('.next');
+    const progressBar    = document.querySelector('.progress-bar');
+    const progress       = document.querySelector('.progress');
+    const currentTimeEl  = document.querySelector('.current-time');
+    const totalTimeEl    = document.querySelector('.total-time');
+    const volumeBar      = document.querySelector('.volume-bar');
+    const repeatBtn      = document.querySelector('.repeat');
+    const shuffleBtn     = document.querySelector('.shuffle');
+    const songTitleEl    = document.querySelector('.song-title-main');
+    const artistEl       = document.querySelector('.artist-main');
+    const albumArtEl     = document.querySelector('.album-art-main');
+    const songList       = document.querySelector('.song-list');
+    const choosingAlbums = document.querySelectorAll('.choosing_album');
+  
+    // === Variables ===
+    let audioCtx;
+    let analyser;
+    let source;
+    let bufferLength;
+    let dataArray;
+  
+    let currentFolder     = 'rock';
+    let currentSongIndex  = 0;
+    let isRepeat          = false;
+    let isShuffle         = false;
+    let songs             = [];
+  
+    // Example: folder => array of songs
+    const folderSongs = {
+      pop: [
+        {
+          title: "Chokotto no tokae",
+          artist: "Mafumafu",
+          audio: "./music/pop/Manunchan.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "Baka Mitai",
+          artist: "Kiryu",
+          audio: "./music/pop/Baka Mitai.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "Plastic Love",
+          artist: "ASTROPHYSICS",
+          audio: "./music/pop/ASTROPHYSICS - Plastic Love - 01 Plastic Love.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        }
+      ],
+      rock: [
+        {
+          title: "KING",
+          artist: "Futakuchi Mana",
+          audio: "./music/rock/King.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        }
+      ],
+      edm: [],
+      jazz: [
+        {
+          title: "Love miss",
+          artist: "Unknown",
+          audio: "./music/jazz/Love miss.mp3",
+          albumArt: "images/JAZZ_cover.png"
+        }
+      ],
+      lofi: [],
+      phonk: []
+    };
+  
+    // === Initialize AudioContext after user interaction ===
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        source   = audioCtx.createMediaElementSource(audioElement);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+  
+        analyser.fftSize = 256;
+        bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+      }
+    }
+  
+    // === Visualizer ===
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+      analyser.getByteFrequencyData(dataArray);
+  
+      canvas.width  = window.innerWidth;
+      canvas.height = 600; // or any height you prefer
+  
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const barWidth = (canvas.width / bufferLength) * 2.5;
+      let x = 0;
+  
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i];
+        ctx.fillStyle = '#00ffaa';
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      }
+    }
+  
+    // === Load a Song into the Audio Element ===
+    function loadSong(index) {
+      audioElement.src = songs[index].audio;
+      songTitleEl.textContent = songs[index].title;
+      artistEl.textContent    = songs[index].artist;
+      albumArtEl.src          = songs[index].albumArt;
+    }
+  
+    // === Play / Pause ===
+    function playSong() {
+      initAudioContext();
+      audioElement.play().catch(err => {
+        console.error("Cannot play audio:", err);
+        alert("ไม่สามารถเล่นเพลงได้ ตรวจสอบชื่อไฟล์หรือพาธไฟล์");
+      });
+      document.querySelector('.play-pause .play-icon').style.display = 'none';      // ซ่อนไอคอน Play
+      document.querySelector('.play-pause .pause-icon').style.display = 'inline-block'; // แสดงไอคอน Pause
+    //playPauseBtn.textContent = "Pause";
+      requestAnimationFrame(drawVisualizer);
+    }
+  
+    function pauseSong() {
+      audioElement.pause();
+    document.querySelector('.play-pause .play-icon').style.display = 'inline-block'; // แสดงไอคอน Play
+    document.querySelector('.play-pause .pause-icon').style.display = 'none';      // ซ่อนไอคอน Pause
+    //playPauseBtn.textContent = "Play";
+    }
+  
+    // === Update Song List Display ===
+    function updateSongList() {
+      songList.innerHTML = '';
+      songs.forEach((song, i) => {
+        const songItem = document.createElement('div');
+        songItem.classList.add('song-item');
+        songItem.innerHTML = `
+          <span>${i + 1}</span>
+          <span>${song.title}</span>
+          <span class="song-duration">--:--</span>
+        `;
+        // On click, load & play
+        songItem.addEventListener('click', () => {
+          currentSongIndex = i;
+          loadSong(currentSongIndex);
+          playSong();
+        });
+  
+        // Preload each audio to show durations
+        const tempAudio = new Audio(song.audio);
+        tempAudio.addEventListener('loadedmetadata', () => {
+          const min = Math.floor(tempAudio.duration / 60);
+          const sec = Math.floor(tempAudio.duration % 60);
+          songItem.querySelector('.song-duration').textContent =
+            `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+        });
+        songList.appendChild(songItem);
+      });
+    }
+  
+    // === Player Controls Listeners ===
+    playPauseBtn.addEventListener('click', () => {
+      if (audioElement.paused) playSong();
+      else pauseSong();
     });
-    return folderPaths;
-}
-
-function getPath(floder_number){
-    const baseDirectory = './music';
-    folder_paths = createFolderPaths(folder_name[floder_number], baseDirectory);
-}
-
-
-
+  
+    prevBtn.addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      loadSong(currentSongIndex);
+      playSong();
+    });
+  
+    nextBtn.addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      playSong();
+    });
+  
+    audioElement.addEventListener('timeupdate', () => {
+      if (!isNaN(audioElement.duration)) {
+        // Update progress
+        const pct = (audioElement.currentTime / audioElement.duration) * 100;
+        progress.style.width = `${pct}%`;
+  
+        // Update current time
+        const min = Math.floor(audioElement.currentTime / 60);
+        const sec = Math.floor(audioElement.currentTime % 60);
+        currentTimeEl.textContent =
+          `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+      }
+    });
+  
+    audioElement.addEventListener('loadedmetadata', () => {
+      const totalMin = Math.floor(audioElement.duration / 60);
+      const totalSec = Math.floor(audioElement.duration % 60);
+      totalTimeEl.textContent =
+        `${String(totalMin).padStart(2,'0')}:${String(totalSec).padStart(2,'0')}`;
+    });
+  
+    progressBar.addEventListener('click', (e) => {
+      const width = progressBar.clientWidth;
+      const clickX = e.offsetX;
+      audioElement.currentTime = (clickX / width) * audioElement.duration;
+    });
+  
+    volumeBar.addEventListener('input', () => {
+      audioElement.volume = volumeBar.value;
+    });
+  
+    repeatBtn.addEventListener('click', () => {
+      isRepeat = !isRepeat;
+      repeatBtn.style.color = isRepeat ? '#00ffaa' : '#eee';
+    });
+  
+    shuffleBtn.addEventListener('click', () => {
+      isShuffle = !isShuffle;
+      shuffleBtn.style.color = isShuffle ? '#00ffaa' : '#eee';
+    });
+  
+    audioElement.addEventListener('ended', () => {
+      if (isRepeat) {
+        playSong();
+      } else if (isShuffle) {
+        currentSongIndex = Math.floor(Math.random() * songs.length);
+        loadSong(currentSongIndex);
+        playSong();
+      } else {
+        // Normal next
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+        playSong();
+      }
+    });
+  
+    // === Switching Albums (e.g., "POP", "ROCK") ===
+    choosingAlbums.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // If using data-folder
+        const folder = btn.dataset.folder; 
+        currentFolder = folder;
+  
+        songs = folderSongs[currentFolder] || [];
+        if (!songs.length) {
+          alert(`ไม่มีเพลงในโฟลเดอร์ ${currentFolder}`);
+          return;
+        }
+        currentSongIndex = 0;
+        updateSongList();
+        loadSong(currentSongIndex);
+        pauseSong(); // or keep it paused until user hits play
+      });
+    });
+  
+    // === Initial Load ===
+    songs = folderSongs[currentFolder];
+    if (songs && songs.length) {
+      updateSongList();
+      loadSong(currentSongIndex);
+    } else {
+      alert("ไม่มีเพลงในโฟลเดอร์เริ่มต้น (rock)");
+    }
+  });
+  
