@@ -54,6 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
           artist: "ASTROPHYSICS",
           audio: "./music/pop/ASTROPHYSICS - Plastic Love - 01 Plastic Love.mp3",
           albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "BITE!",
+          artist: "HOYO-mix",
+          audio: "./music/pop/BITE!.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "ヒステリックナイトガール",
+          artist: "PSYQUI",
+          audio: "./music/pop/ヒステリックナイトガール.mp3",
+          albumArt: "images/EDM_cover.jpeg"
         }
       ],
       rock: [
@@ -62,9 +74,28 @@ document.addEventListener('DOMContentLoaded', () => {
           artist: "Futakuchi Mana",
           audio: "./music/rock/King.mp3",
           albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "Bury the Light",
+          artist: "Casey Edwards",
+          audio: "./music/rock/Bury the Light.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "Middle Of The Night",
+          artist: "Elley Duhé  Rock Version by Rain Paris",
+          audio: "./music/rock/Middle Of The Night - Elley Duhé  Rock Version by Rain Paris.mp3",
+          albumArt: "images/EDM_cover.jpeg"
         }
       ],
-      edm: [],
+      edm: [
+        {
+          title: "Violet Veil",
+          artist: "Kotori",
+          audio: "./music/edm/Kotori - Violet Veil.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        }
+      ],
       jazz: [
         {
           title: "Love miss",
@@ -73,8 +104,22 @@ document.addEventListener('DOMContentLoaded', () => {
           albumArt: "images/JAZZ_cover.png"
         }
       ],
-      lofi: [],
-      phonk: []
+      lofi: [
+        {
+          title: "Yawns",
+          artist: "Nite Crawler",
+          audio: "./music/lofi/Yawns.mp3",
+          albumArt: "images/LOFI_cover.jpg"
+        }
+      ],
+      phonk: [
+        {
+          title: "This Feeling",
+          artist: "My!lane",
+          audio: "./music/phonk/My!lane  - This Feeling.mp3",
+          albumArt: "images/PHONK_cover.jpg"
+        }
+      ]
     };
   
     // === Initialize AudioContext after user interaction ===
