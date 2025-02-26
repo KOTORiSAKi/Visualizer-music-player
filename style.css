@@ -278,9 +278,9 @@ body {
 .progress-bar {
     width: 95%;
     height: 5px;
-    background-color: gray;
+    background-color: #3c6155;
     cursor: pointer;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -288,8 +288,8 @@ body {
 }
 
 .progress {
-    height: 100;
-    background-color: #00ffaa;
+    height: 5px;
+    background-color: #ffffff;
     width: 0%;
     border-radius: 5px;
 }
@@ -298,7 +298,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    gap: 20px;
     width: 100%;
+    padding: 6px 0;
 }
 
 .player-controls button {
@@ -309,7 +311,7 @@ body {
     color: white;
     margin: 0 5px;
     transition: color 0.3s ease;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .player-controls button:hover {
