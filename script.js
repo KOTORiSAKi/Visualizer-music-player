@@ -41,31 +41,37 @@ document.addEventListener('DOMContentLoaded', () => {
           title: "Chokotto no tokae",
           artist: "Mafumafu",
           audio: "./music/pop/Manunchan.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/POP_cover.jpg"
         },
         {
           title: "Baka Mitai",
           artist: "Kiryu",
           audio: "./music/pop/Baka Mitai.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/POP_cover.jpg"
         },
         {
           title: "Plastic Love",
           artist: "ASTROPHYSICS",
           audio: "./music/pop/ASTROPHYSICS - Plastic Love - 01 Plastic Love.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/POP_cover.jpg"
         },
         {
           title: "BITE!",
           artist: "HOYO-mix",
           audio: "./music/pop/BITE!.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/POP_cover.jpg"
         },
         {
           title: "ヒステリックナイトガール",
           artist: "PSYQUI",
           audio: "./music/pop/ヒステリックナイトガール.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/POP_cover.jpg"
+        },
+        {
+          title: "Pretender",
+          artist: "Official髭男dism",
+          audio: "./music/pop/Official髭男dism - PretenderOfficial Video.mp3",
+          albumArt: "images/POP_cover.jpg"
         }
       ],
       rock: [
@@ -73,26 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
           title: "KING",
           artist: "Futakuchi Mana",
           audio: "./music/rock/King.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/ROCK_cover.webp"
         },
         {
           title: "Bury the Light",
           artist: "Casey Edwards",
           audio: "./music/rock/Bury the Light.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/ROCK_cover.webp"
         },
         {
           title: "Middle Of The Night",
           artist: "Elley Duhé  Rock Version by Rain Paris",
           audio: "./music/rock/Middle Of The Night - Elley Duhé  Rock Version by Rain Paris.mp3",
-          albumArt: "images/EDM_cover.jpeg"
+          albumArt: "images/ROCK_cover.webp"
         }
       ],
       edm: [
         {
+          title: "BABYDOLL (Speed)",
+          artist: "Ari Abdul",
+          audio: "./music/edm/Ari Abdul - BABYDOLL (Speed) (Official Video).mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
           title: "Violet Veil",
           artist: "Kotori",
           audio: "./music/edm/Kotori - Violet Veil.mp3",
+          albumArt: "images/EDM_cover.jpeg"
+        },
+        {
+          title: "Havana (ft. Britt Lari)",
+          artist: "Poylow & CPX",
+          audio: "./music/edm/Poylow & CPX - Havana (ft. Britt Lari).mp3",
           albumArt: "images/EDM_cover.jpeg"
         }
       ],
@@ -109,6 +127,18 @@ document.addEventListener('DOMContentLoaded', () => {
           title: "Yawns",
           artist: "Nite Crawler",
           audio: "./music/lofi/Yawns.mp3",
+          albumArt: "images/LOFI_cover.jpg"
+        },
+        {
+          title: "Tip Toe",
+          artist: "HYBS",
+          audio: "./music/lofi/HYBS - Tip Toe  Official Audio.mp3",
+          albumArt: "images/LOFI_cover.jpg"
+        },
+        {
+          title: "midnitehaze [4rkBG8HB16I]",
+          artist: "Cloud VonSmoke",
+          audio: "./music/lofi/midnitehaze [4rkBG8HB16I].mp3",
           albumArt: "images/LOFI_cover.jpg"
         }
       ],
