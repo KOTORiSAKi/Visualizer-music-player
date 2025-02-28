@@ -73,6 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
         artist: "Official髭男dism",
         audio: "./music/pop/Official髭男dism - PretenderOfficial Video.mp3",
         albumArt: "images/POP_cover.jpg"
+      },
+      {
+        title: "AKASAKIBunny Girl",
+        artist: "NaturalMusic Video",
+        audio: "./music/pop/AKASAKIBunny Girl - NaturalMusic Video.mp3",
+        albumArt: "images/POP_cover.jpg"
       }
     ],
     rock: [
@@ -118,6 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "2 Phut Hon (KAIZ Remix)",
         artist: "Phao",
         audio: "./music/edm/Phao - 2 Phut Hon (KAIZ Remix)  TikTok Vietnamese Music 2020.mp3",
+        albumArt: "images/EDM_cover.jpeg"
+      },
+      {
+        title: "Heart Afire (feat. Strix)",
+        artist: "Defqwop",
+        audio: "./music/edm/Defqwop - Heart Afire (feat. Strix).mp3",
+        albumArt: "images/EDM_cover.jpeg"
+      },
+      {
+        title: "Love Of My Life",
+        artist: "Vosai",
+        audio: "./music/edm/Vosai - Love Of My Life  Trap  NCS - Copyright Free Music.mp3",
         albumArt: "images/EDM_cover.jpeg"
       }
     ],
@@ -172,6 +190,30 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "This Feeling",
         artist: "My!lane",
         audio: "./music/phonk/My!lane  - This Feeling.mp3",
+        albumArt: "images/PHONK_cover.jpg"
+      },
+      {
+        title: "SLAY!",
+        artist: "Eternxlkz",
+        audio: "./music/phonk/Eternxlkz - SLAY! (Official Audio).mp3",
+        albumArt: "images/PHONK_cover.jpg"
+      },
+      {
+        title: "LOVELY BASTARDS",
+        artist: "YATASHIGANG & ZWE1HVNDXR",
+        audio: "./music/phonk/LOVELY BASTARDS (YATASHIGANG, ZWE1HVNDXR).mp3",
+        albumArt: "images/PHONK_cover.jpg"
+      },
+      {
+        title: "GigaChad Theme (Phonk Version)",
+        artist: "g3oxem",
+        audio: "./music/phonk/g3oxem - GigaChad Theme (Phonk House Version).mp3",
+        albumArt: "images/PHONK_cover.jpg"
+      },
+      {
+        title: "EMPTY DREAMS (ft. Kingpin Skinny Pimp)",
+        artist: "CYPARISS",
+        audio: "./music/phonk/CYPARISS - EMPTY DREAMS (ft. Kingpin Skinny Pimp).mp3",
         albumArt: "images/PHONK_cover.jpg"
       }
     ]
@@ -402,5 +444,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
