@@ -80,7 +80,7 @@ body {
     /* Ensure content is on top of the blur */
 }
 
-.sidebar hr {
+.sidebar hr , hr{
     border-color: #00ffaa;
     border-radius: 20px;
     /* Change this to your desired color */

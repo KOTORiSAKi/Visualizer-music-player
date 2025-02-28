@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const songList = document.querySelector('.song-list');
   const choosingAlbums = document.querySelectorAll('.choosing_album');
 
-  // === Variables ===
+  // === Default Variables ===
   let isDragging = false;//1
   let audioCtx;
   let analyser;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let bufferLength;
   let dataArray;
 
-  let currentFolder = 'rock';
+  let currentFolder = 'edm';
   let currentSongIndex = 0;
   let isRepeat = false;
   let isShuffle = false;
@@ -222,21 +222,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Initialize AudioContext after user interaction ===
   function initAudioContext() {
     if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioCtx.createAnalyser();
-      source = audioCtx.createMediaElementSource(audioElement);
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();//API caller
+      analyser = audioCtx.createAnalyser();//setup API
+      source = audioCtx.createMediaElementSource(audioElement);//set input part for API
+      source.connect(analyser);//link the input part to API
+      analyser.connect(audioCtx.destination);//Set the output of API to Windows API
 
-      analyser.fftSize = 256;
-      bufferLength = analyser.frequencyBinCount;
-      dataArray = new Uint8Array(bufferLength);
+      analyser.fftSize = 256;//set the way to process the audio fequency level through Al.
+      bufferLength = analyser.frequencyBinCount;//send the fequency audio data to bufferLength
+      dataArray = new Uint8Array(bufferLength);//setup the value int array
     }
   }
 
   // === Visualizer ===
   function drawVisualizer() {
-    requestAnimationFrame(drawVisualizer);
+    requestAnimationFrame(drawVisualizer);//tell the browser to request the next of this function for each frame
     analyser.getByteFrequencyData(dataArray);
 
     canvas.width = window.innerWidth;
@@ -372,10 +372,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   audioElement.addEventListener('ended', () => {
+    let theLastSong = currentSongIndex;
     if (isRepeat) {
       playSong();
     } else if (isShuffle) {
-      currentSongIndex = Math.floor(Math.random() * songs.length);
+      while(1){
+        currentSongIndex = Math.floor(Math.random() * songs.length);
+        if(currentSongIndex != theLastSong){break;}
+      }
       loadSong(currentSongIndex);
       playSong();
     } else {
@@ -400,8 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       currentSongIndex = 0;
       updateSongList();
-      loadSong(currentSongIndex);
-      pauseSong(); // or keep it paused until user hits play
     });
   });
 
@@ -411,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSongList();
     loadSong(currentSongIndex);
   } else {
-    alert("ไม่มีเพลงในโฟลเดอร์เริ่มต้น (rock)");
+    alert("ไม่มีเพลงในโฟลเดอร์เริ่มต้น (edm)");
   }
 
 
@@ -419,8 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
   progressBar.addEventListener('mousemove', (e) => {
     const progressBarWidth = progressBar.clientWidth;
     const offsetX = e.offsetX;
-    const hoverTimePercentage = (offsetX / progressBarWidth);
-    const hoverTimeSeconds = audioElement.duration * hoverTimePercentage;
+    const hoverTimeSeconds = audioElement.duration * (offsetX / progressBarWidth);
 
     if (!isNaN(hoverTimeSeconds)) {
       const min = Math.floor(hoverTimeSeconds / 60);
