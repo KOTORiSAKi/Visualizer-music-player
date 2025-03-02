@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const choosingAlbums = document.querySelectorAll('.choosing_album');
 
   // === Default Variables ===
-  let isDragging = false;//1
   let audioCtx;
   let analyser;
   let source;
@@ -78,6 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "AKASAKIBunny Girl",
         artist: "NaturalMusic Video",
         audio: "./music/pop/AKASAKIBunny Girl - NaturalMusic Video.mp3",
+        albumArt: "images/POP_cover.jpg"
+      },
+      {
+        title: "In Jesus Name (Remix)",
+        artist: "Unknown",
+        audio: "./music/pop/In Jesus Name (Remix) BASS COVER  STX Holiday Youth Convention Luis Pacheco.mp3",
         albumArt: "images/POP_cover.jpg"
       }
     ],
@@ -271,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.querySelector('.play-pause .play-icon').style.display = 'none';      // ซ่อนไอคอน Play
     document.querySelector('.play-pause .pause-icon').style.display = 'inline-block'; // แสดงไอคอน Pause
-    //playPauseBtn.textContent = "Pause";
     requestAnimationFrame(drawVisualizer);
   }
 
@@ -279,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
     audioElement.pause();
     document.querySelector('.play-pause .play-icon').style.display = 'inline-block'; // แสดงไอคอน Play
     document.querySelector('.play-pause .pause-icon').style.display = 'none';      // ซ่อนไอคอน Pause
-    //playPauseBtn.textContent = "Play";
   }
 
   // === Update Song List Display ===
