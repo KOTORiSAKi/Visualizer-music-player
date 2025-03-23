@@ -41,49 +41,49 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "Chokotto no tokae",
         artist: "Mafumafu",
         audio: "./music/pop/Manunchan.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "Baka Mitai",
         artist: "Kiryu",
         audio: "./music/pop/Baka Mitai.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "Plastic Love",
         artist: "ASTROPHYSICS",
         audio: "./music/pop/ASTROPHYSICS - Plastic Love - 01 Plastic Love.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "BITE!",
         artist: "HOYO-mix",
         audio: "./music/pop/BITE!.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "ヒステリックナイトガール",
         artist: "PSYQUI",
         audio: "./music/pop/ヒステリックナイトガール.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "Pretender",
         artist: "Official髭男dism",
         audio: "./music/pop/Official髭男dism - PretenderOfficial Video.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "AKASAKIBunny Girl",
         artist: "NaturalMusic Video",
         audio: "./music/pop/AKASAKIBunny Girl - NaturalMusic Video.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       },
       {
         title: "In Jesus Name (Remix)",
         artist: "Unknown",
         audio: "./music/pop/In Jesus Name (Remix) BASS COVER  STX Holiday Youth Convention Luis Pacheco.mp3",
-        albumArt: "images/POP_cover.jpg"
+        albumArt: "./images/POP_cover.jpg"
       }
     ],
     rock: [
